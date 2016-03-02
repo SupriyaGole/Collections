@@ -27,6 +27,31 @@ public class LinkedList{
         length++;
     }
 
+    public void addFirst(Node<String> stringNode) {
+        if(first == null){
+            first = stringNode;
+            last = stringNode;
+        }
+        else{
+            stringNode.next = first;
+            first = stringNode;
+        }
+        length++;
+    }
+
+    public void addLast(Node<String> stringNode) {
+        if(first == null){
+            first = stringNode;
+            last = stringNode;
+        }
+        else{
+            stringNode.previous = last;
+            last.next = stringNode;
+            last = stringNode;
+        }
+        length++;
+    }
+
     public boolean contains(Object o) {
         return indexOf(o) != -1;
     }
