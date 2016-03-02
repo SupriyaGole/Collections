@@ -1,4 +1,4 @@
-public class LinkedList {
+public class LinkedList{
     private int length;
     private Node first;
     private Node last;
@@ -56,5 +56,24 @@ public class LinkedList {
             count++;
         }
         return element;
+    }
+
+    public ListItr listIterator(int size) {
+        return new ListItr(size,this);
+    }
+
+    public Node remove(int index) {
+        if(index == 0) {
+            Node removedEle = (Node) get(index);
+            first = null;
+            last  = null;
+            return removedEle;
+        }
+        else{
+            Node element = (Node) get(index-1);
+            Node removedEle = element.next;
+            element.next = element.next.next;
+            return removedEle;
+        }
     }
 }

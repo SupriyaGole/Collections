@@ -84,7 +84,54 @@ public class LinkedListTest {
     }
 
     @Test
-    public void remove_removes_the_element_from_specified_index() {
+    public void remove_removes_the_element_from_specified_index0() {
+        LinkedList linkedList = new LinkedList();
+        Node<String> firstNode = new Node<>("firstNode");
+        linkedList.add(firstNode);
 
+        Node<String> secondNode = new Node<>("secondNode");
+        linkedList.add(secondNode);
+        assertEquals(linkedList.remove(0),firstNode);
+    }
+
+    @Test
+    public void remove_removes_the_element_from_specified_index1() {
+        LinkedList linkedList = new LinkedList();
+        Node<String> firstNode = new Node<>("firstNode");
+        linkedList.add(firstNode);
+
+        Node<String> secondNode = new Node<>("secondNode");
+        linkedList.add(secondNode);
+        assertEquals(linkedList.remove(1),secondNode);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void remove_throws_error_when_index_is_invalid() {
+        LinkedList linkedList = new LinkedList();
+        Node<String> firstNode = new Node<>("firstNode");
+        linkedList.add(firstNode);
+
+        Node<String> secondNode = new Node<>("secondNode");
+        linkedList.add(secondNode);
+        assertEquals(linkedList.remove(3),secondNode);
+    }
+
+    @Test
+    public void listIterator_iterates_over_the_list_element_from_specified_index() throws Exception {
+        LinkedList linkedList = new LinkedList();
+        Node<String> firstNode = new Node<>("firstNode");
+        linkedList.add(firstNode);
+
+        Node<String> secondNode = new Node<>("secondNode");
+        linkedList.add(secondNode);
+        ListItr iterator = linkedList.listIterator(0);
+        String[] values = {"firstNode","secondNode"};
+        int i=0;
+        while(iterator.hasNext()){
+            Object element = iterator.next();
+            Node element1 = (Node) element;
+            assertEquals(element1.value,values[i]);
+            i++;
+        }
     }
 }
