@@ -16,7 +16,6 @@ public class LinkedListTest {
         LinkedList linkedList = new LinkedList();
         Node<String> firstNode = new Node<>("firstNode");
         linkedList.addFirst(firstNode);
-
         Node<String> secondNode = new Node<>("secondNode");
         linkedList.addFirst(secondNode);
         assertEquals(linkedList.size(), 2);
@@ -136,13 +135,18 @@ public class LinkedListTest {
 
     @Test(expected = IndexOutOfBoundsException.class)
     public void get_throws_IndexOutOfBoundException_when_given_index_is_invalid() throws Exception {
-        LinkedList linkedList = new LinkedList();
-        Node<String> firstNode = new Node<>("firstNode");
-        linkedList.add(firstNode);
+        try {
+            LinkedList linkedList = new LinkedList();
+            Node<String> firstNode = new Node<>("firstNode");
+            linkedList.add(firstNode);
 
-        Node<String> secondNode = new Node<>("secondNode");
-        linkedList.add(secondNode);
-        linkedList.get(2);
+            Node<String> secondNode = new Node<>("secondNode");
+            linkedList.add(secondNode);
+            linkedList.get(2);
+        }catch (IndexOutOfBoundsException e){
+            assertEquals(e.getMessage(),"index: 2 doesn't exist.");
+            throw e;
+        }
     }
 
     @Test
@@ -183,13 +187,18 @@ public class LinkedListTest {
 
     @Test(expected = IndexOutOfBoundsException.class)
     public void remove_throws_error_when_index_is_invalid() {
-        LinkedList linkedList = new LinkedList();
-        Node<String> firstNode = new Node<>("firstNode");
-        linkedList.add(firstNode);
+        try {
+            LinkedList linkedList = new LinkedList();
+            Node<String> firstNode = new Node<>("firstNode");
+            linkedList.add(firstNode);
 
-        Node<String> secondNode = new Node<>("secondNode");
-        linkedList.add(secondNode);
-        assertEquals(linkedList.remove(3),secondNode);
+            Node<String> secondNode = new Node<>("secondNode");
+            linkedList.add(secondNode);
+            assertEquals(linkedList.remove(3),secondNode);
+        }catch (IndexOutOfBoundsException e){
+            assertEquals(e.getMessage(),"index: 2 doesn't exist.");
+            throw e;
+        }
     }
 
     @Test
@@ -248,18 +257,27 @@ public class LinkedListTest {
 
     @Test(expected = IndexOutOfBoundsException.class)
     public void listIterator_throws_exception_when_index_is_greater_than_array_size(){
-        LinkedList linkedList = new LinkedList();
-        Node<String> firstNode = new Node<>("firstNode");
-        linkedList.add(firstNode);
-
-        linkedList.listIterator(2);
+        try {
+            LinkedList linkedList = new LinkedList();
+            Node<String> firstNode = new Node<>("firstNode");
+            linkedList.add(firstNode);
+            linkedList.listIterator(2);
+        }catch (IndexOutOfBoundsException e){
+            assertEquals(e.getMessage(),"index: 2 doesn't exist.");
+            throw e;
+        }
     }
 
     @Test(expected = Exception.class)
     public void next_returns_null_when_hasNext_is_false() throws Exception{
-        LinkedList linkedList = new LinkedList();
-        ListItr iterator = linkedList.listIterator(0);
-        iterator.next();
+        try {
+            LinkedList linkedList = new LinkedList();
+            ListItr iterator = linkedList.listIterator(0);
+            iterator.next();
+        }catch (Exception e){
+            assertEquals(e.getMessage(),"Next element is not available");
+            throw e;
+        }
     }
 
 
@@ -284,8 +302,12 @@ public class LinkedListTest {
 
     @Test(expected = Exception.class)
     public void iterator_throws_exception_when_asking_for_iterating_from_invalid_index() throws Exception {
-        LinkedList linkedList = new LinkedList();
-        ListItr iterator = linkedList.listIterator(1);
-
+        try {
+            LinkedList linkedList = new LinkedList();
+            ListItr iterator = linkedList.listIterator(1);
+        }catch (Exception e){
+            assertEquals(e.getMessage(),"index: 1 doesn't exist.");
+            throw e;
+        }
     }
 }
